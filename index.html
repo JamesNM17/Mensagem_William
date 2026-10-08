@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#dceeff">
+  <title>Uma carta para o Professor William 💙</title>
+  <style>
+    :root {
+      --ink: #183b63;
+      --blue: #3678b9;
+      --blue-dark: #215a91;
+      --blue-soft: #eaf4ff;
+      --blue-mid: #c9e2fb;
+      --sky: #f6fbff;
+      --gold: #f3d589;
+      --white: #fffefd;
+      --shadow: 0 22px 60px rgba(36, 86, 135, .17);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px 16px 42px;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255,255,255,.9) 0 3px, transparent 4px),
+        radial-gradient(circle at 88% 23%, rgba(255,255,255,.8) 0 4px, transparent 5px),
+        linear-gradient(145deg, #d8ebff, #f2f8ff 50%, #c7e1fb);
+      color: var(--ink);
+      font-family: ui-rounded, "Trebuchet MS", "Segoe UI", sans-serif;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    .top-note {
+      color: #37658f;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin: 3px 0 16px;
+      text-align: center;
+    }
+    .letter {
+      position: relative;
+      width: min(100%, 760px);
+      background: var(--white);
+      border: 2px solid #b6d6f6;
+      border-radius: 26px;
+      padding: clamp(24px, 5vw, 52px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .letter::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 2px dashed #b5d6f3;
+      border-radius: 18px;
+      pointer-events: none;
+    }
+    .content { position: relative; z-index: 1; }
+    .stars {
+      text-align: center;
+      font-size: 1.4rem;
+      letter-spacing: .45em;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+    h1 {
+      text-align: center;
+      color: var(--blue-dark);
+      font-size: clamp(2.1rem, 7vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+      margin: 0;
+    }
+    .subtitle {
+      background: var(--blue-soft);
+      border-radius: 999px;
+      color: var(--blue-dark);
+      width: fit-content;
+      max-width: 100%;
+      margin: 14px auto 28px;
+      padding: 10px 19px;
+      text-align: center;
+      font-size: clamp(.95rem, 2.8vw, 1.15rem);
+      font-weight: 800;
+    }
+    .salutation { font-size: 1.22rem; font-weight: 900; margin: 0 0 15px; }
+    p { line-height: 1.78; font-size: 1.03rem; margin: 0 0 16px; }
+    .highlight {
+      background: linear-gradient(transparent 58%, #d8eaff 58%);
+      font-weight: 800;
+    }
+    .blue-note {
+      margin: 25px 0;
+      padding: 19px 21px;
+      background: #eff7ff;
+      border-left: 5px solid #6eabe5;
+      border-radius: 14px;
+    }
+    .blue-note p { margin: 0; }
+    .poem {
+      margin: 29px auto;
+      padding: 23px 18px;
+      max-width: 520px;
+      text-align: center;
+      background: linear-gradient(135deg, #eaf4ff, #f5faff);
+      border-radius: 20px;
+      border: 1px solid #cee4fb;
+    }
+    .poem h2 { margin: 0 0 14px; color: var(--blue-dark); font-size: 1.25rem; }
+    .poem p { margin: 0; line-height: 1.9; font-style: italic; }
+    .project {
+      margin: 25px 0;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid #d5e7f9;
+      border-radius: 18px;
+      background: #fbfdff;
+    }
+    .project strong { display: block; color: var(--blue-dark); font-size: 1.17rem; margin-bottom: 7px; }
+    .closing {
+      text-align: center;
+      margin: 28px auto 5px;
+      color: var(--blue-dark);
+      font-weight: 900;
+      font-size: clamp(1.13rem, 3.4vw, 1.45rem);
+      line-height: 1.5;
+    }
+    .signature { text-align: center; margin-top: 18px; line-height: 1.8; }
+    .signature b { font-size: 1.12rem; color: var(--blue-dark); }
+    .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 11px; margin: 22px auto 0; width: min(100%, 760px); }
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 19px;
+      background: var(--blue-dark);
+      color: white;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(33, 90, 145, .16);
+      transition: transform .18s ease, background .18s ease;
+    }
+    button:hover { transform: translateY(-2px); background: #174875; }
+    button:focus-visible { outline: 3px solid #f3d589; outline-offset: 3px; }
+    button.secondary { background: #fff; color: var(--blue-dark); border: 1px solid #a8cdec; }
+    .footer { color: #37658f; text-align: center; font-size: .85rem; margin-top: 18px; }
+    .heart { color: #5d98d2; }
+    @media (max-width: 520px) {
+      body { padding: 17px 10px 28px; }
+      .letter { padding: 28px 22px; border-radius: 20px; }
+      .letter::before { inset: 8px; border-radius: 14px; }
+      p { font-size: .98rem; }
+      .actions { flex-direction: column; padding: 0 7px; }
+      button { width: 100%; }
+    }
+    @media print {
+      body { background: white; padding: 0; }
+      .top-note, .actions, .footer { display: none !important; }
+      .letter { box-shadow: none; border: 1px solid #9dbfe0; width: 100%; max-width: none; }
+      .letter::before { inset: 10px; }
+      @page { margin: 12mm; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } button { transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="top-note">Uma homenagem feita com carinho 💙</div>
+
+  <main class="letter" aria-label="Carta de agradecimento ao professor William">
+    <div class="content">
+      <div class="stars" aria-hidden="true">✦ ✧ ✦</div>
+      <h1>Professor William</h1>
+      <div class="subtitle">Um professor incrível e um amigo de verdade 💙</div>
+
+      <p class="salutation">William,</p>
+
+      <p>Tem gente que ensina uma matéria. E tem gente que, além de ensinar, torna o caminho mais leve, incentiva ideias que pareciam distantes e mostra que aprender também pode ser divertido. Você é esse tipo de pessoa.</p>
+
+      <p>Como meu professor de <span class="highlight">Desenvolvimento de Sistemas</span>, você compartilha conhecimento, mas o que mais admiro é a maneira como faz isso: com espontaneidade, apoio e esse seu jeito de ser, às vezes <em>mais criança do que os próprios alunos</em>. E, sinceramente, que bom que você não perde essa alegria! Ela faz parte do professor e do amigo incrível que você é.</p>
+
+      <p>Obrigado por acreditar nos projetos, por ouvir as ideias mais diferentes e por incentivar a gente a tentar tirar tudo do papel. Seu apoio faz diferença porque não fica só no “seria legal”: você ajuda a gente a acreditar que vale a pena começar, insistir e construir.</p>
+
+      <div class="blue-note">
+        <p>Quero deixar um agradecimento especial pelo apoio ao <strong>Cuidar &amp; Conectar</strong>. Para mim, esse projeto representa muito, e ter alguém que acolhe a ideia, incentiva e torce para que ela cresça torna a jornada muito mais significativa. Obrigado por enxergar potencial nos projetos e nas pessoas por trás deles.</p>
+      </div>
+
+      <p>Mais do que um ótimo professor, você é um amigo que apoia, encoraja e faz diferença de verdade. Talvez você nem perceba o quanto um conselho, uma conversa, uma brincadeira ou simplesmente a disposição de apoiar uma ideia pode marcar alguém. Mas essas coisas ficam com a gente.</p>
+
+      <section class="poem" aria-label="Mini poesia para o professor William">
+        <h2>Um pouquinho de poesia para você</h2>
+        <p>Entre linhas de código e sonhos a criar,<br>
+você ensina que sempre vale tentar.<br>
+Com ideias, risadas e incentivo sincero,<br>
+transforma o possível em algo verdadeiro.<br><br>
+Que a vida lhe devolva, em dobro, o bem que espalha,<br>
+que nunca falte coragem para seguir sua jornada.<br>
+Pois quem ajuda outros sonhos a florescer<br>
+também deixa sua marca no mundo sem perceber. 💙</p>
+      </section>
+
+      <p>Espero que você receba esta mensagem como um pequeno gesto de gratidão por tudo o que representa. Não é preciso ter todas as respostas nem ser sério o tempo inteiro para ser uma referência. Às vezes, basta estar presente, apoiar, ensinar e continuar sendo essa pessoa tão genuína.</p>
+
+      <div class="project">
+        <strong>Obrigado por apoiar ideias que querem fazer a diferença.</strong>
+        Que o Cuidar &amp; Conectar e tantos outros projetos encontrem espaço para crescer — e que você continue fazendo parte dessas histórias, do seu jeito único.
+      </div>
+
+      <div class="closing">Espero que este presente alegre seu coração,<br>nem que seja só um pouquinho. <span class="heart">♥</span></div>
+
+      <div class="signature">
+        Com admiração, carinho e gratidão,<br>
+        <b>ex melhor aluno de Desenvolvimento de Sistemas</b>
+      </div>
+      <div class="stars" style="margin-top:22px" aria-hidden="true">✦ 💙 ✦</div>
+    </div>
+  </main>
+
+  <div class="actions" aria-label="Ações da carta">
+    <button type="button" onclick="window.print()">Imprimir / salvar em PDF</button>
+    <button type="button" class="secondary" id="copyButton">Copiar mensagem</button>
+  </div>
+  <div class="footer">Feito com carinho</div>
+
+  <script>
+    const copyButton = document.getElementById('copyButton');
+    const plainMessage = `William,\n\nTem gente que ensina uma matéria. E tem gente que, além de ensinar, torna o caminho mais leve, incentiva ideias que pareciam distantes e mostra que aprender também pode ser divertido. Você é esse tipo de pessoa.\n\nComo meu professor de Desenvolvimento de Sistemas, você compartilha conhecimento, mas o que mais admiro é a maneira como faz isso: com espontaneidade, apoio e esse seu jeito de ser, às vezes mais criança do que os próprios alunos. E, sinceramente, que bom que você não perde essa alegria! Ela faz parte do professor e do amigo incrível que você é.\n\nObrigado por acreditar nos projetos, por ouvir as ideias mais diferentes e por incentivar a gente a tentar tirar tudo do papel. Quero deixar um agradecimento especial pelo apoio ao Cuidar & Conectar. Para mim, esse projeto representa muito, e ter alguém que acolhe a ideia, incentiva e torce para que ela cresça torna a jornada muito mais significativa.\n\nMais do que um ótimo professor, você é um amigo que apoia, encoraja e faz diferença de verdade. Talvez você nem perceba o quanto um conselho, uma conversa, uma brincadeira ou simplesmente a disposição de apoiar uma ideia pode marcar alguém. Mas essas coisas ficam com a gente.\n\nEntre linhas de código e sonhos a criar,\nvocê ensina que sempre vale tentar.\nCom ideias, risadas e incentivo sincero,\ntransforma o possível em algo verdadeiro.\nQue a vida lhe devolva, em dobro, o bem que espalha,\nque nunca falte coragem para seguir sua jornada.\nPois quem ajuda outros sonhos a florescer\ntambém deixa sua marca no mundo sem perceber.\n\nEspero que você receba esta mensagem como um pequeno gesto de gratidão por tudo o que representa. Espero que este presente alegre seu coração, nem que seja só um pouquinho.\n\nCom admiração, carinho e gratidão,\nseu aluno de Desenvolvimento de Sistemas 💙`;
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(plainMessage);
+        copyButton.textContent = 'Mensagem copiada! 💙';
+      } catch (error) {
+        const area = document.createElement('textarea');
+        area.value = plainMessage;
+        area.setAttribute('readonly', '');
+        area.style.position = 'absolute';
+        area.style.left = '-9999px';
+        document.body.appendChild(area);
+        area.select();
+        const success = document.execCommand('copy');
+        area.remove();
+        copyButton.textContent = success ? 'Mensagem copiada! 💙' : 'Selecione e copie o texto da carta';
+      }
+      window.setTimeout(() => { copyButton.textContent = 'Copiar mensagem'; }, 2600);
+    });
+  </script>
+</body>
+</html>
