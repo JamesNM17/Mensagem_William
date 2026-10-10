@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#dceeff">
+  <meta name="description" content="Uma homenagem especial ao Professor William, com carinho e gratidão.">
   <title>Uma carta para o Professor William 💙</title>
   <style>
     :root {
@@ -20,9 +21,12 @@
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
+      position: relative;
+      isolation: isolate;
       margin: 0;
       min-height: 100vh;
       padding: 34px 16px 42px;
+      overflow-x: hidden;
       background:
         radial-gradient(circle at 12% 8%, rgba(255,255,255,.9) 0 3px, transparent 4px),
         radial-gradient(circle at 88% 23%, rgba(255,255,255,.8) 0 4px, transparent 5px),
@@ -33,7 +37,75 @@
       align-items: center;
       flex-direction: column;
     }
+
+    /* Luzes suaves de fundo */
+    .ambient-glow {
+      position: fixed;
+      z-index: 0;
+      inset: -20%;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 18% 30%, rgba(104, 177, 239, .24), transparent 34%),
+        radial-gradient(ellipse at 82% 65%, rgba(142, 205, 255, .27), transparent 32%),
+        radial-gradient(ellipse at 52% 8%, rgba(255, 255, 255, .78), transparent 27%);
+      filter: blur(20px);
+      animation: auroraDrift 18s ease-in-out infinite alternate;
+    }
+
+    /* Camada de efeitos: decorativa e sempre clicável através dela */
+    .fx-layer {
+      position: fixed;
+      z-index: 3;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      user-select: none;
+      contain: strict;
+    }
+    .fx-layer::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(65, 133, 195, .055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(65, 133, 195, .055) 1px, transparent 1px);
+      background-size: 58px 58px;
+      opacity: .5;
+      mask-image: radial-gradient(ellipse at center, #000 0%, transparent 82%);
+    }
+    .code-particle {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      color: #397dbb;
+      opacity: 0;
+      white-space: nowrap;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: clamp(10px, 1.55vw, 16px);
+      font-weight: 800;
+      letter-spacing: .015em;
+      text-shadow: 0 0 8px rgba(255,255,255,.96), 0 0 17px rgba(90,160,224,.55);
+      animation: codeFloat var(--duration) linear var(--delay) infinite;
+      will-change: transform, opacity;
+    }
+    .code-particle:nth-child(3n) { color: #679fd2; }
+    .code-particle:nth-child(4n) { color: #2e679f; }
+    .spark {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 7px 2px rgba(255,255,255,.9), 0 0 17px 4px rgba(105,174,235,.55);
+      opacity: 0;
+      animation: sparkle var(--duration) ease-in-out var(--delay) infinite;
+    }
+
     .top-note {
+      position: relative;
+      z-index: 1;
       color: #37658f;
       font-size: .82rem;
       font-weight: 800;
@@ -41,16 +113,19 @@
       text-transform: uppercase;
       margin: 3px 0 16px;
       text-align: center;
+      text-shadow: 0 1px 8px rgba(255,255,255,.85);
     }
     .letter {
       position: relative;
+      z-index: 1;
       width: min(100%, 760px);
-      background: var(--white);
+      background: rgba(255, 254, 253, .96);
       border: 2px solid #b6d6f6;
       border-radius: 26px;
       padding: clamp(24px, 5vw, 52px);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow), 0 0 32px rgba(130, 190, 242, .13);
       overflow: hidden;
+      animation: letterGlow 7s ease-in-out infinite;
     }
     .letter::before {
       content: "";
@@ -59,6 +134,7 @@
       border: 2px dashed #b5d6f3;
       border-radius: 18px;
       pointer-events: none;
+      animation: borderShimmer 6s ease-in-out infinite;
     }
     .content { position: relative; z-index: 1; }
     .stars {
@@ -67,6 +143,8 @@
       letter-spacing: .45em;
       color: var(--blue);
       margin-bottom: 6px;
+      animation: starShimmer 3.8s ease-in-out infinite;
+      text-shadow: 0 0 13px rgba(105, 169, 225, .25);
     }
     h1 {
       text-align: center;
@@ -75,6 +153,7 @@
       line-height: 1.02;
       letter-spacing: -.045em;
       margin: 0;
+      text-shadow: 0 3px 22px rgba(92, 157, 216, .13);
     }
     .subtitle {
       background: var(--blue-soft);
@@ -87,6 +166,7 @@
       text-align: center;
       font-size: clamp(.95rem, 2.8vw, 1.15rem);
       font-weight: 800;
+      box-shadow: 0 5px 18px rgba(70, 133, 194, .07);
     }
     .salutation { font-size: 1.22rem; font-weight: 900; margin: 0 0 15px; }
     p { line-height: 1.78; font-size: 1.03rem; margin: 0 0 16px; }
@@ -100,6 +180,7 @@
       background: #eff7ff;
       border-left: 5px solid #6eabe5;
       border-radius: 14px;
+      box-shadow: inset 0 0 22px rgba(174, 213, 248, .12);
     }
     .blue-note p { margin: 0; }
     .poem {
@@ -110,6 +191,7 @@
       background: linear-gradient(135deg, #eaf4ff, #f5faff);
       border-radius: 20px;
       border: 1px solid #cee4fb;
+      box-shadow: 0 8px 26px rgba(84, 148, 208, .08);
     }
     .poem h2 { margin: 0 0 14px; color: var(--blue-dark); font-size: 1.25rem; }
     .poem p { margin: 0; line-height: 1.9; font-style: italic; }
@@ -120,6 +202,7 @@
       border: 1px solid #d5e7f9;
       border-radius: 18px;
       background: #fbfdff;
+      box-shadow: 0 8px 22px rgba(84, 148, 208, .06);
     }
     .project strong { display: block; color: var(--blue-dark); font-size: 1.17rem; margin-bottom: 7px; }
     .closing {
@@ -132,44 +215,70 @@
     }
     .signature { text-align: center; margin-top: 18px; line-height: 1.8; }
     .signature b { font-size: 1.12rem; color: var(--blue-dark); }
-    .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 11px; margin: 22px auto 0; width: min(100%, 760px); }
-    button {
-      appearance: none;
-      border: 0;
-      border-radius: 999px;
-      padding: 13px 19px;
-      background: var(--blue-dark);
-      color: white;
-      font: inherit;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 6px 16px rgba(33, 90, 145, .16);
-      transition: transform .18s ease, background .18s ease;
+    .footer {
+      position: relative;
+      z-index: 1;
+      color: #37658f;
+      text-align: center;
+      font-size: .85rem;
+      margin-top: 18px;
+      text-shadow: 0 1px 8px rgba(255,255,255,.85);
     }
-    button:hover { transform: translateY(-2px); background: #174875; }
-    button:focus-visible { outline: 3px solid #f3d589; outline-offset: 3px; }
-    button.secondary { background: #fff; color: var(--blue-dark); border: 1px solid #a8cdec; }
-    .footer { color: #37658f; text-align: center; font-size: .85rem; margin-top: 18px; }
     .heart { color: #5d98d2; }
+
+    @keyframes codeFloat {
+      0% { transform: translate3d(0, 14vh, 0) rotate(-7deg); opacity: 0; }
+      12% { opacity: .30; }
+      72% { opacity: .24; }
+      100% { transform: translate3d(var(--drift), -118vh, 0) rotate(var(--spin)); opacity: 0; }
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: .08; transform: scale(.55); }
+      50% { opacity: .85; transform: scale(1.25); }
+    }
+    @keyframes auroraDrift {
+      0% { transform: translate3d(-2%, -1%, 0) scale(1); }
+      50% { transform: translate3d(2%, 2%, 0) scale(1.06); }
+      100% { transform: translate3d(-1%, 3%, 0) scale(1.02); }
+    }
+    @keyframes letterGlow {
+      0%, 100% { box-shadow: var(--shadow), 0 0 25px rgba(130, 190, 242, .11); }
+      50% { box-shadow: 0 24px 64px rgba(36, 86, 135, .19), 0 0 39px rgba(130, 190, 242, .21); }
+    }
+    @keyframes borderShimmer {
+      0%, 100% { border-color: #b5d6f3; }
+      50% { border-color: #8ebfe9; }
+    }
+    @keyframes starShimmer {
+      0%, 100% { opacity: .82; }
+      50% { opacity: 1; }
+    }
+
     @media (max-width: 520px) {
       body { padding: 17px 10px 28px; }
       .letter { padding: 28px 22px; border-radius: 20px; }
       .letter::before { inset: 8px; border-radius: 14px; }
       p { font-size: .98rem; }
-      .actions { flex-direction: column; padding: 0 7px; }
-      button { width: 100%; }
+      .code-particle { font-size: 11px; }
+      .fx-layer::before { background-size: 44px 44px; opacity: .35; }
     }
     @media print {
       body { background: white; padding: 0; }
-      .top-note, .actions, .footer { display: none !important; }
-      .letter { box-shadow: none; border: 1px solid #9dbfe0; width: 100%; max-width: none; }
-      .letter::before { inset: 10px; }
+      .top-note, .footer, .fx-layer, .ambient-glow { display: none !important; }
+      .letter { box-shadow: none; border: 1px solid #9dbfe0; width: 100%; max-width: none; animation: none; }
+      .letter::before { inset: 10px; animation: none; }
+      .stars { animation: none; }
       @page { margin: 12mm; }
     }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } button { transition: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
   </style>
 </head>
 <body>
+  <div class="ambient-glow" aria-hidden="true"></div>
+  <div class="fx-layer" id="fxLayer" aria-hidden="true"></div>
   <div class="top-note">Uma homenagem feita com carinho 💙</div>
 
   <main class="letter" aria-label="Carta de agradecimento ao professor William">
@@ -182,26 +291,26 @@
 
       <p>Tem gente que ensina uma matéria. E tem gente que, além de ensinar, torna o caminho mais leve, incentiva ideias que pareciam distantes e mostra que aprender também pode ser divertido. Você é esse tipo de pessoa.</p>
 
-      <p>Como meu professor de <span class="highlight">Desenvolvimento de Sistemas</span>, você compartilha conhecimento, mas o que mais admiro é a maneira como faz isso: com espontaneidade, apoio e esse seu jeito de ser, às vezes <em>mais criança do que os próprios alunos</em>. E, sinceramente, que bom que você não perde essa alegria! Ela faz parte do professor e do amigo incrível que você é.</p>
+      <p>Como meu professor de <span class="highlight">Metodologia, Carreira, Versionamento e Banco de Dados</span>, você compartilha conhecimento, mas o que mais admiro é a maneira como faz isso: com espontaneidade, apoio e esse seu jeito de ser, às vezes <em>mais criança do que os próprios alunos</em>. E, sinceramente, que bom que você não perde essa alegria! Ela faz parte do professor e do amigo incrível que você é.</p>
 
-      <p>Obrigado por acreditar nos projetos, por ouvir as ideias mais diferentes e por incentivar a gente a tentar tirar tudo do papel. Seu apoio faz diferença porque não fica só no “seria legal”: você ajuda a gente a acreditar que vale a pena começar, insistir e construir.</p>
+      <p>Obrigado por ensinar que boas ideias precisam de planejamento, que a carreira se constrói um passo de cada vez, que o versionamento ajuda a aprender com cada mudança e que dados bem organizados dão estrutura a projetos de verdade. Obrigado também por ouvir as ideias mais diferentes e incentivar a gente a tirar tudo do papel — mesmo quando ainda estamos descobrindo o melhor caminho.</p>
 
       <div class="blue-note">
         <p>Quero deixar um agradecimento especial pelo apoio ao <strong>Cuidar &amp; Conectar</strong>. Para mim, esse projeto representa muito, e ter alguém que acolhe a ideia, incentiva e torce para que ela cresça torna a jornada muito mais significativa. Obrigado por enxergar potencial nos projetos e nas pessoas por trás deles.</p>
       </div>
 
-      <p>Mais do que um ótimo professor, você é um amigo que apoia, encoraja e faz diferença de verdade. Talvez você nem perceba o quanto um conselho, uma conversa, uma brincadeira ou simplesmente a disposição de apoiar uma ideia pode marcar alguém. Mas essas coisas ficam com a gente.</p>
+      <p>Mais do que um ótimo professor, você é um amigo que apoia, encoraja e faz diferença de verdade. Talvez você nem perceba o quanto um conselho, uma conversa, uma brincadeira ou simplesmente a disposição de apoiar uma ideia pode marcar alguém. Mas essas coisas ficam com a gente — como um bom registro no histórico de tudo o que nos ajuda a crescer.</p>
 
       <section class="poem" aria-label="Mini poesia para o professor William">
         <h2>Um pouquinho de poesia para você</h2>
-        <p>Entre linhas de código e sonhos a criar,<br>
+        <p>Entre planos, commits e tabelas a criar,<br>
 você ensina que sempre vale tentar.<br>
-Com ideias, risadas e incentivo sincero,<br>
+Com metas, versões e incentivo sincero,<br>
 transforma o possível em algo verdadeiro.<br><br>
-Que a vida lhe devolva, em dobro, o bem que espalha,<br>
-que nunca falte coragem para seguir sua jornada.<br>
-Pois quem ajuda outros sonhos a florescer<br>
-também deixa sua marca no mundo sem perceber. 💙</p>
+Que a vida lhe devolva o bem que espalha,<br>
+e encha de boas conquistas a sua jornada.<br>
+Pois quem ajuda outros caminhos a florescer<br>
+deixa um legado que o tempo não vai desfazer. 💙</p>
       </section>
 
       <p>Espero que você receba esta mensagem como um pequeno gesto de gratidão por tudo o que representa. Não é preciso ter todas as respostas nem ser sério o tempo inteiro para ser uma referência. Às vezes, basta estar presente, apoiar, ensinar e continuar sendo essa pessoa tão genuína.</p>
@@ -215,39 +324,56 @@ também deixa sua marca no mundo sem perceber. 💙</p>
 
       <div class="signature">
         Com admiração, carinho e gratidão,<br>
-        <b>ex melhor aluno de Desenvolvimento de Sistemas</b>
+        <b>ex-melhor aluno de Desenvolvimento de Sistemas</b>
       </div>
       <div class="stars" style="margin-top:22px" aria-hidden="true">✦ 💙 ✦</div>
     </div>
   </main>
 
-  <div class="actions" aria-label="Ações da carta">
-    <button type="button" onclick="window.print()">Imprimir / salvar em PDF</button>
-    <button type="button" class="secondary" id="copyButton">Copiar mensagem</button>
-  </div>
-  <div class="footer">Feito com carinho</div>
+  <div class="footer">Feito por James Nascimento Matos</div>
 
   <script>
-    const copyButton = document.getElementById('copyButton');
-    const plainMessage = `William,\n\nTem gente que ensina uma matéria. E tem gente que, além de ensinar, torna o caminho mais leve, incentiva ideias que pareciam distantes e mostra que aprender também pode ser divertido. Você é esse tipo de pessoa.\n\nComo meu professor de Desenvolvimento de Sistemas, você compartilha conhecimento, mas o que mais admiro é a maneira como faz isso: com espontaneidade, apoio e esse seu jeito de ser, às vezes mais criança do que os próprios alunos. E, sinceramente, que bom que você não perde essa alegria! Ela faz parte do professor e do amigo incrível que você é.\n\nObrigado por acreditar nos projetos, por ouvir as ideias mais diferentes e por incentivar a gente a tentar tirar tudo do papel. Quero deixar um agradecimento especial pelo apoio ao Cuidar & Conectar. Para mim, esse projeto representa muito, e ter alguém que acolhe a ideia, incentiva e torce para que ela cresça torna a jornada muito mais significativa.\n\nMais do que um ótimo professor, você é um amigo que apoia, encoraja e faz diferença de verdade. Talvez você nem perceba o quanto um conselho, uma conversa, uma brincadeira ou simplesmente a disposição de apoiar uma ideia pode marcar alguém. Mas essas coisas ficam com a gente.\n\nEntre linhas de código e sonhos a criar,\nvocê ensina que sempre vale tentar.\nCom ideias, risadas e incentivo sincero,\ntransforma o possível em algo verdadeiro.\nQue a vida lhe devolva, em dobro, o bem que espalha,\nque nunca falte coragem para seguir sua jornada.\nPois quem ajuda outros sonhos a florescer\ntambém deixa sua marca no mundo sem perceber.\n\nEspero que você receba esta mensagem como um pequeno gesto de gratidão por tudo o que representa. Espero que este presente alegre seu coração, nem que seja só um pouquinho.\n\nCom admiração, carinho e gratidão,\nseu aluno de Desenvolvimento de Sistemas 💙`;
-    copyButton.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(plainMessage);
-        copyButton.textContent = 'Mensagem copiada! 💙';
-      } catch (error) {
-        const area = document.createElement('textarea');
-        area.value = plainMessage;
-        area.setAttribute('readonly', '');
-        area.style.position = 'absolute';
-        area.style.left = '-9999px';
-        document.body.appendChild(area);
-        area.select();
-        const success = document.execCommand('copy');
-        area.remove();
-        copyButton.textContent = success ? 'Mensagem copiada! 💙' : 'Selecione e copie o texto da carta';
+    (() => {
+      const layer = document.getElementById('fxLayer');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const symbols = [
+        '</>', '{ }', 'git commit', 'git merge', 'SQL', 'SELECT *', '0101', 'ERD',
+        'API', 'branch/main', 'commit()', 'Agile', 'Scrum', 'MVC', 'roadmap',
+        'career.dev', 'OKR', 'JOIN', 'PRIMARY KEY', 'git push', 'v1.0.0',
+        'CREATE TABLE', 'sprint', 'deploy', 'metodologia', 'plan()', 'UPDATE', '∞'
+      ];
+      const particleCount = window.innerWidth < 520 ? 19 : 30;
+      const random = (min, max) => Math.random() * (max - min) + min;
+
+      symbols.slice(0, particleCount).forEach((symbol, index) => {
+        const particle = document.createElement('span');
+        particle.className = 'code-particle';
+        particle.textContent = symbol;
+        particle.style.setProperty('--x', `${random(2, 82)}vw`);
+        particle.style.setProperty('--y', `${random(48, 118)}vh`);
+        particle.style.setProperty('--drift', `${random(-85, 85)}px`);
+        particle.style.setProperty('--spin', `${random(-24, 24)}deg`);
+        const duration = random(19, 36);
+        particle.style.setProperty('--duration', `${duration}s`);
+        particle.style.setProperty('--delay', reduceMotion ? '0s' : `${-random(0, duration)}s`);
+        if (index % 5 === 0) particle.style.fontSize = 'clamp(11px, 1.9vw, 19px)';
+        layer.appendChild(particle);
+      });
+
+      if (!reduceMotion) {
+        const sparkCount = window.innerWidth < 520 ? 18 : 32;
+        for (let i = 0; i < sparkCount; i++) {
+          const spark = document.createElement('span');
+          spark.className = 'spark';
+          spark.style.setProperty('--x', `${random(1, 98)}vw`);
+          spark.style.setProperty('--y', `${random(2, 98)}vh`);
+          spark.style.setProperty('--size', `${random(2, 4.5)}px`);
+          spark.style.setProperty('--duration', `${random(2.5, 6)}s`);
+          spark.style.setProperty('--delay', `${random(-6, 0)}s`);
+          layer.appendChild(spark);
+        }
       }
-      window.setTimeout(() => { copyButton.textContent = 'Copiar mensagem'; }, 2600);
-    });
+    })();
   </script>
 </body>
 </html>
